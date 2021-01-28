@@ -29,7 +29,39 @@ function start() {
             name: "starterQs",
             type: "rawlist",
             message: "What would you like to do?",
-            choices: ["View all Employees", "View all Roles", "View Departments", "Add Employee", "Add Department", "Add Role", "Update Employee Role"]
-
+            choices: [
+                "View all Employees", 
+                "View all Roles", 
+                "View Departments", 
+                "Add Employee", 
+                "Add Department", 
+                "Add Role", 
+                "Update Employee Role"
+            ]
         })
-}
+        .then(function(answer) {
+            switch (answer.starterQs) {
+            case "View all Employees":
+                employeeView();
+                break;
+            case "View all Roles":
+                roleView();
+                break;
+            case "View Departments":
+                departmentView();
+                break;
+            case "Add Employee":
+                employeeAdd();
+                break;
+            case "Add Department":
+                departmentAdd();
+                break;
+            case "Add Role":
+                roleAdd;
+                break;
+            case "Update Employee Role":
+                updateRole();
+                break;
+            }
+        });
+    }
