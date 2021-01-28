@@ -8,3 +8,10 @@ CREATE TABLE department (
     name VARCHAR(30),
     PRIMARY KEY (id)
 );
+
+CREATE TABLE role (
+    id INT NOT NULL,
+    salary DECIMAL(10,4) NULL,
+    department_id INT NOT NULL,
+    PRIMARY KEY (id)
+);
