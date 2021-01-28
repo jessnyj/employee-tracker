@@ -2,17 +2,17 @@ var mysql = require("mysql");
 var inquirer = require("inquirer");
 const { start } = require("repl");
 
-// create the connection information for the sql database
+// Connection information for the sql database
 var connection = mysql.createConnection({
     host: "localhost",
 
-    // Your port; if not 3306
+    // Port
     port: 3306,
 
-    // Your username
+    // Username
     user: "root",
 
-    // Your password
+    // Password
     password: "password",
     database: "employeeDB"
 });
