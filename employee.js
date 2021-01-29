@@ -23,6 +23,7 @@ connection.connect(function (err) {
     console.log("connected as id " + connection.threadId);
 });
 
+// Table diplaying All Employees
 function employeeTable() {
     connection.query("SELECT * FROM employee", function (err, res) {
 
@@ -41,7 +42,25 @@ function employeeTable() {
     });
 }
 
+// function roleTable() {
+//     connection.query("SELECT * FROM employee", function (err, res) {
 
+//         var table = new Table({
+//             head: ["ID", "First Name", "Last Name", "Role ID", "Manager ID"],
+//             colWidths: [10, 10, 10, 10, 10]
+//         });
+
+//         for (var i = 0; i < res.length; i++) {
+//             table.push(
+//                 [res[i].id, res[i].first_name, res[i].last_name, res[i].role_id, res[i].manager_id],
+//             );
+//         }
+//         console.log(table.toString());
+//         restart()
+//     });
+// }
+
+// Initial Prompt
 function manageEmployees() {
     inquirer
         .prompt({
@@ -63,10 +82,10 @@ function manageEmployees() {
             case "View all Employees":
                 employeeTable();
                 break;
-            case "View all Roles":
+            case "View all Employees by Department":
                 roleView();
                 break;
-            case "View Departments":
+            case "View all Employees by Manager":
                 departmentView();
                 break;
             case "Add Employee":
@@ -85,9 +104,34 @@ function manageEmployees() {
         })
     }
 
-
+// Add Employee
+    function add() {
+        inquirer.prompt([{
+            name: "firstName",
+            message: "\nEnter the Employees first name\n"
+        }, {
+            name: "lastName",
+            message: "Enter the Employees last name\n"
+        }, {
+            name: "role",
+            message: "What is the employee's role?\n"
+        }, {
+            name: "manager",
+            message: "Who is the employee's manager?\n"
     
-
+        }]).then(function (answers) {
+            connection.query("INSERT INTO employee SET ?", {
+                first_name: answers.firstName,
+                last_name: answers.lastName,
+                role_id: answers.role,
+                manager_id: answers.manager
+            })
+            employeeTable();
+        })
+    }
+        
+    
+// Start Over
     function restart() {
         inquirer.prompt([{
             type: "list",

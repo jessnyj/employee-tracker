@@ -1,4 +1,4 @@
-DROP DATABASE IF EXISTS employeeDB;
+-- DROP DATABASE IF EXISTS employeeDB;
 CREATE database employeeDB;
 
 USE employeeDB;
@@ -11,6 +11,7 @@ CREATE TABLE department (
 
 CREATE TABLE role (
     id INT NOT NULL,
+    title VARCHAR(30),
     salary DECIMAL(10,4) NULL,
     department_id INT NOT NULL,
     PRIMARY KEY (id)
@@ -27,10 +28,10 @@ CREATE TABLE employee (
 );
 
 INSERT INTO department (name)
-VALUES ("Beauty"), ("Food"), ("Technology");
+VALUES ("Sales"), ("Finance"), ("Legal"), ("Engineering");
 
-INSERT INTO role (salary, department_id)
-VALUES (15, 100), (10, 45), (17, 120);
+INSERT INTO role (title, salary, department_id)
+VALUES ("Sales Lead", 100000, 100), ("Account Manager", 160000, 45), ("Accountant", 125000, 120), ("Account Manager", 160000, 16);
 
 INSERT INTO employee (first_name, last_name, role_id, manager_id)
-VALUES ("Rosalina", "Juarez", 23, 1), ("Trey", "Jackson", 70, 40), ("Nick", "Jones", 77, 5);
+VALUES ("John", "Doe", 23, null), ("Danielle", "Matthews", 70, 45), ("Nick", "Jones", 77, null), ("Natalie", "Martinez", 10, 16);
