@@ -29,7 +29,7 @@ function employeeTable() {
 
         var table = new Table({
             head: ["ID", "First Name", "Last Name", "Role ID", "Manager ID"],
-            colWidths: [10, 10, 10, 10, 10]
+            colWidths: [10, 15, 15, 10, 15]
         });
 
         for (var i = 0; i < res.length; i++) {
@@ -47,7 +47,7 @@ function roleTable() {
 
         var table = new Table({
             head: ["ID", "Title", "Salary", "Department Id"],
-            colWidths: [10, 10, 10, 10, 10]
+            colWidths: [10, 15, 15, 15]
         });
 
         for (var i = 0; i < res.length; i++) {
@@ -60,6 +60,23 @@ function roleTable() {
     });
 }
 
+function departmentTable() {
+    connection.query("SELECT * FROM department", function (err, res) {
+
+        var table = new Table({
+            head: ["ID", "Name"],
+            colWidths: [10, 15]
+        });
+
+        for (var i = 0; i < res.length; i++) {
+            table.push(
+                [res[i].id, res[i].name],
+            );
+        }
+        console.log(table.toString());
+        restart()
+    });
+}
 // Initial Prompt
 function manageEmployees() {
     inquirer
@@ -86,7 +103,7 @@ function manageEmployees() {
                     roleTable();
                     break;
                 case "View Departments":
-                    departmentView();
+                    departmentTable();
                     break;
                 case "Add Employee":
                     employeeAdd();
