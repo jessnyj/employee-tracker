@@ -1,6 +1,7 @@
 var mysql = require("mysql");
 var inquirer = require("inquirer");
 var Table = require('cli-table');
+var colors = require('colors');
 
 // Connection information for the sql database
 var connection = mysql.createConnection({
@@ -26,16 +27,13 @@ function employeeTable() {
     connection.query("SELECT * FROM employee", function (err, res) {
 
         var table = new Table({
-            //You can name these table heads chicken if you'd like. They are simply the headers for a table we're putting our data in
             head: ["ID", "First Name", "Last Name", "Role ID", "Manager ID"],
-            //These are just the width of the columns. Only mess with these if you want to change the cosmetics of our response
             colWidths: [10, 10, 10, 10, 10]
         });
 
-        // table is an Array, so you can `push`, `unshift`, `splice`
         for (var i = 0; i < res.length; i++) {
             table.push(
-                [res[i].id, res[i].firstw_name, res[i].num_seasons, res[i].genre, res[i].rating],
+                [res[i].id, res[i].first_name, res[i].last_name, res[i].role_id, res[i].manager_id],
             );
         }
         console.log(table.toString());
@@ -63,7 +61,7 @@ function manageEmployees() {
         .then(function(answer) {
             switch (answer.starterQs) {
             case "View all Employees":
-                employeeView();
+                employeeTable();
                 break;
             case "View all Roles":
                 roleView();
@@ -87,6 +85,8 @@ function manageEmployees() {
         })
     }
 
+
+    
 
     function restart() {
         inquirer.prompt([{
