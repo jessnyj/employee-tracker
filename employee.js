@@ -175,7 +175,6 @@ function employeeAdd() {
             })
         })
     })
-
 }
 
 // Add Departments
@@ -189,7 +188,6 @@ function departmentAdd() {
         })
         departmentTable();
     })
-
 }
 
 // Add Role
@@ -211,7 +209,6 @@ function roleAdd() {
         })
         roleTable();
     })
-
 }
 
 // Update Employee Role
@@ -245,6 +242,29 @@ function updateRole() {
     })
 }
 
+// Delete Employee
+// function deleteEmployee() {
+//     connection.query("SELECT * FROM employee", function (err, res) {
+//         var delEmp = [];
+//         for (var i = 0; i < res.length; i++) {
+//             delEmp.push(res[i].first_name + " " + res[i].last_name)
+//         }
+//         inquirer.prompt([{
+//             name: "delete",
+//             type: "list",
+//             choices: delEmp,
+//             message: "Please select the employee you would like to remove."
+//         }, 
+//     ]).then(function (answer) {
+//             connection.query("DELETE FROM employee WHERE ?", {
+//                 first_name: answer.delete,
+//                 last_name: answer.delete
+//             })
+//             employeeTable()
+//         })
+//     })
+// }
+
 // Delete Department
 function deleteDepartment() {
     connection.query("SELECT * FROM department", function (err, res) {
@@ -262,10 +282,8 @@ function deleteDepartment() {
                 name: answer.delete
             })
             departmentTable()
-
         })
     })
-
 }
 
 // Delete Role
@@ -285,10 +303,8 @@ function deleteRole() {
                 title: answer.delete
             })
             roleTable()
-
         })
     })
-
 }
 
 // Start Over
@@ -304,7 +320,6 @@ function restart() {
         } else {
             exit()
         }
-
     });
 }
 
