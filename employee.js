@@ -206,6 +206,36 @@ function roleAdd() {
 
 }
 
+// Update Employee Role
+function updateRole() {
+    connection.query("SELECT * FROM role", function (err, res) {
+        var newRole = [];
+        for (var i = 0; i < res.length; i++) {
+            newRole.push(res[i].title)
+        }
+        inquirer.prompt([{
+            name: "roleTitle",
+            type: "list",
+            message: "Which role would you like to update?",
+            choices: newRole,
+        }, {
+            name: "salary",
+            message: "Enter the new salary for this role."
+        }]).then(function (answers) {
+            connection.query("UPDATE role SET ? WHERE?", [{
+                salary: (answers.salary)
+            }, {
+                title: answers.roleTitle
+            }],
+                function (err, res) {
+                    console.log("Here is an updated list of the nominees:")
+                    roleTable();
+
+                }
+            )
+        })
+    })
+}
 
 // Start Over
 function restart() {
