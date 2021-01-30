@@ -92,7 +92,7 @@ function roleTable() {
 
         var table = new Table({
             head: ["ID", "Title", "Salary", "Department Id"],
-            colWidths: [10, 15, 15, 15]
+            colWidths: [10, 23, 15, 15]
         });
 
         for (var i = 0; i < res.length; i++) {
@@ -184,6 +184,27 @@ function departmentAdd() {
 
 }
 
+// Add Role
+function roleAdd() {
+    inquirer.prompt([{
+        name: "roleTitle",
+        message: "\nPlease enter the name of the new role you would like to add.\n"
+    }, {
+        name: "salary",
+        message: "What is the role's annual salary?\n"
+    }, {
+        name: "deptId",
+        message: "What is this role's department id?\n"
+    }]).then(function (answers) {
+        connection.query("INSERT INTO role SET ?", {
+            title: answers.roleTitle,
+            salary: answers.salary,
+            department_id: answers.deptId,
+        })
+        roleTable();
+    })
+
+}
 
 
 // Start Over
