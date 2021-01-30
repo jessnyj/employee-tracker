@@ -23,60 +23,6 @@ connection.connect(function (err) {
     console.log("connected as id " + connection.threadId);
 });
 
-// Table diplaying All Employees
-function employeeTable() {
-    connection.query("SELECT * FROM employee", function (err, res) {
-
-        var table = new Table({
-            head: ["ID", "First Name", "Last Name", "Role ID", "Manager ID"],
-            colWidths: [10, 15, 15, 10, 15]
-        });
-
-        for (var i = 0; i < res.length; i++) {
-            table.push(
-                [res[i].id, res[i].first_name, res[i].last_name, res[i].role_id, res[i].manager_id],
-            );
-        }
-        console.log(table.toString());
-        restart()
-    });
-}
-
-function roleTable() {
-    connection.query("SELECT * FROM role", function (err, res) {
-
-        var table = new Table({
-            head: ["ID", "Title", "Salary", "Department Id"],
-            colWidths: [10, 15, 15, 15]
-        });
-
-        for (var i = 0; i < res.length; i++) {
-            table.push(
-                [res[i].id, res[i].title, res[i].salary, res[i].department_id],
-            );
-        }
-        console.log(table.toString());
-        restart()
-    });
-}
-
-function departmentTable() {
-    connection.query("SELECT * FROM department", function (err, res) {
-
-        var table = new Table({
-            head: ["ID", "Name"],
-            colWidths: [10, 15]
-        });
-
-        for (var i = 0; i < res.length; i++) {
-            table.push(
-                [res[i].id, res[i].name],
-            );
-        }
-        console.log(table.toString());
-        restart()
-    });
-}
 // Initial Prompt
 function manageEmployees() {
     inquirer
@@ -121,20 +67,99 @@ function manageEmployees() {
         })
 }
 
+// Table Diplaying All Employees
+function employeeTable() {
+    connection.query("SELECT * FROM employee", function (err, res) {
+
+        var table = new Table({
+            head: ["ID", "First Name", "Last Name", "Role ID", "Manager ID"],
+            colWidths: [10, 15, 15, 10, 15]
+        });
+
+        for (var i = 0; i < res.length; i++) {
+            table.push(
+                [res[i].id, res[i].first_name, res[i].last_name, res[i].role_id, res[i].manager_id],
+            );
+        }
+        console.log(table.toString());
+        restart()
+    });
+}
+
+// Table Displaying All Roles
+function roleTable() {
+    connection.query("SELECT * FROM role", function (err, res) {
+
+        var table = new Table({
+            head: ["ID", "Title", "Salary", "Department Id"],
+            colWidths: [10, 15, 15, 15]
+        });
+
+        for (var i = 0; i < res.length; i++) {
+            table.push(
+                [res[i].id, res[i].title, res[i].salary, res[i].department_id],
+            );
+        }
+        console.log(table.toString());
+        restart()
+    });
+}
+
+// Table Displaying All Departments
+function departmentTable() {
+    connection.query("SELECT * FROM department", function (err, res) {
+
+        var table = new Table({
+            head: ["ID", "Name"],
+            colWidths: [10, 15]
+        });
+
+        for (var i = 0; i < res.length; i++) {
+            table.push(
+                [res[i].id, res[i].name],
+            );
+        }
+        console.log(table.toString());
+        restart()
+    });
+}
+
+// function updateRating(list) {
+
+//     inquirer.prompt([{
+//         name: "nominee",
+//         type: "list",
+//         message: "Which show do you want to change the rating for",
+//         choices: list
+//     }, {
+//         name: "rating",
+//         message: "Enter the new rating out of 10 (decimals up to two places are accepted)"
+//     }]).then(function (answers) {
+//         connection.query("UPDATE nominees SET ? WHERE?", [{
+//             rating: parseFloat(answers.rating)
+//         }, {
+//             show_name: answers.nominee
+//         }],
+//             function (err, res) {
+//                 console.log("Here is an updated list of the nominees:")
+//                 review()
+
+//             }
+//         )
+//     })
+
+// SELECT nutrition.id, ingredients.foodname FROM ingredients INNER JOIN nutrition ON nutrition.foodname = ingredients.foodname
 
 // Add Employee
 function employeeAdd() {
     connection.query("SELECT title, id FROM role", function (err, res) {
         var titleRole = [];
-        var roleId = [];
+        // var roleId = [];
         for (var i = 0; i < res.length; i++) {
-            var temp = {title: res[i].title, id: res[i].id}
-            titleRole.push(
-                res[i].title
-            );
-            roleId.push(temp);
+            // var temp = {roleName: res[i].title, idNum: res[i].id}
+            titleRole.push(res[i].title);
+            // roleId.push(temp);
         }
-        console.log(roleId);
         inquirer.prompt([{
             name: "firstName",
             message: "\nEnter the Employees first name\n"
@@ -155,7 +180,7 @@ function employeeAdd() {
             connection.query("INSERT INTO employee SET ?", {
                 first_name: answers.firstName,
                 last_name: answers.lastName,
-                role_id: answers.role,
+                role_id: answers.titleRole,
                 // manager_id: answers.manager
             })
             employeeTable();

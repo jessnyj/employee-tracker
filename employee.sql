@@ -12,11 +12,13 @@ CREATE TABLE department (
 CREATE TABLE role (
     id INT NOT NULL AUTO_INCREMENT,
     title VARCHAR(30),
-    salary DECIMAL(10,4) NULL,
+    salary DECIMAL(10, 2) NULL,
     department_id INT NOT NULL,
-    PRIMARY KEY (id)
+    PRIMARY KEY (id),
+    FOREIGN KEY (department_id) REFERENCES department (id)
 );
 
+-- FOREIGN KEY (PersonID) REFERENCES Persons(PersonID)
 
 CREATE TABLE employee (
     id INT NOT NULL AUTO_INCREMENT,
@@ -24,16 +26,19 @@ CREATE TABLE employee (
     last_name VARCHAR(30),
     role_id INT NOT NULL,
     manager_id INT,
-    PRIMARY KEY (id)
+    PRIMARY KEY (id),
+    FOREIGN KEY (role_id) REFERENCES role (id),
+    FOREIGN KEY (manager_id) REFERENCES role (id)
+
 );
 
 INSERT INTO department (name)
 VALUES ("Sales"), ("Finance"), ("Legal"), ("Engineering");
 
 INSERT INTO role (title, salary, department_id)
-VALUES ("Sales Lead", 100000, 100), ("Account Manager", 160000, 45), ("Accountant", 125000, 120), ("Account Manager", 160000, 16);
+VALUES ("Sales Lead", 100000, 1), ("Sales Manager", 160000, 1), ("Accountant", 120000, 2), ("Account Manager", 160000, 2), ("Lawyer", 125000, 3), ("Electrical Engineer", 160000, 4), ("Lead Engineer", 180000, 4);
 
 
 -- manager and dept id diff
 INSERT INTO employee (first_name, last_name, role_id, manager_id)
-VALUES ("John", "Doe", 23, null), ("Danielle", "Matthews", 70, 45), ("Nick", "Jones", 77, null), ("Natalie", "Martinez", 10, 16);
+VALUES ("John", "Doe", 1, 2), ("Danielle", "Matthews", 2, null), ("Nick", "Jones", 3, 4), ("Robert", "White", 4, null), ("Jorge", "Ramirez", 5, null), ("Natalie", "Martinez", 4, 5), ("Jessny", "Joseph", 5, null);
