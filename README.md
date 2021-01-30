@@ -19,7 +19,6 @@
 [Demo](https://drive.google.com/file/d/1hWp9hMdw0AY_eXNW05clstLZgZBAgMry/view)
 
 ## Technologies Used
-* HTML5
 * javascript
 * MySQL
 * NodeJS
