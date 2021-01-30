@@ -38,7 +38,8 @@ function manageEmployees() {
                 "Add Department",
                 "Add Role",
                 "Update Employee Role",
-                "Delete Role"
+                "Delete Role",
+                "Delete Department"
             ]
         })
         .then(function (answer) {
@@ -66,6 +67,9 @@ function manageEmployees() {
                     break;
                 case "Delete Role":
                     deleteRole();
+                    break;
+                case "Delete Department":
+                    deleteDepartment();
                     break;
             }
         })
@@ -239,6 +243,29 @@ function updateRole() {
             )
         })
     })
+}
+
+// Delete Department
+function deleteDepartment() {
+    connection.query("SELECT * FROM department", function (err, res) {
+        var delDept = [];
+        for (var i = 0; i < res.length; i++) {
+            delDept.push(res[i].name)
+        }
+        inquirer.prompt([{
+            name: "delete",
+            type: "list",
+            choices: delDept,
+            message: "Which department would you like to delete?"
+        }]).then(function (answer) {
+            connection.query("DELETE FROM department WHERE ?", {
+                name: answer.delete
+            })
+            departmentTable()
+
+        })
+    })
+
 }
 
 // Delete Role
