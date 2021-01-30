@@ -139,36 +139,53 @@ function employeeAdd() {
                 managerId.push(data);
 
             }
-        inquirer.prompt([{
-            name: "firstName",
-            message: "\nEnter the Employees first name\n"
-        }, {
-            name: "lastName",
-            message: "Enter the Employees last name\n"
-        }, {
-            type: 'list',
-            name: "role",
-            message: "What is the employee's role?\n",
-            choices: roleId,
-        }, {
-            type: 'list',
-            name: "manager",
-            message: "Who is the employee's manager?\n",
-            choices: managerId,
-        }]).then(function (answers) {
-            console.log(answers.role);
-            connection.query("INSERT INTO employee SET ?", {
-                first_name: answers.firstName,
-                last_name: answers.lastName,
-                role_id: answers.role,
-                manager_id: answers.manager,
+            inquirer.prompt([{
+                name: "firstName",
+                message: "\nEnter the Employees first name\n"
+            }, {
+                name: "lastName",
+                message: "Enter the Employees last name\n"
+            }, {
+                type: 'list',
+                name: "role",
+                message: "What is the employee's role?\n",
+                choices: roleId,
+            }, {
+                type: 'list',
+                name: "manager",
+                message: "Who is the employee's manager?\n",
+                choices: managerId,
+            }]).then(function (answers) {
+                console.log(answers.role);
+                connection.query("INSERT INTO employee SET ?", {
+                    first_name: answers.firstName,
+                    last_name: answers.lastName,
+                    role_id: answers.role,
+                    manager_id: answers.manager,
+                })
+                employeeTable();
             })
-            employeeTable();
         })
-    })
     })
 
 }
+
+// Add Departments
+function departmentAdd() {
+    inquirer.prompt([{
+        name: "deptName",
+        message: "\nPlease enter the name of the department you would like to add.\n"
+    }]).then(function (answers) {
+        connection.query("INSERT INTO department SET ?", {
+            name: answers.deptName,
+        })
+        departmentTable();
+    })
+
+}
+
+
+
 // Start Over
 function restart() {
     inquirer.prompt([{
