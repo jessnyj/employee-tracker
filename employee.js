@@ -37,7 +37,8 @@ function manageEmployees() {
                 "Add Employee",
                 "Add Department",
                 "Add Role",
-                "Update Employee Role"
+                "Update Employee Role",
+                "Delete Role"
             ]
         })
         .then(function (answer) {
@@ -62,6 +63,9 @@ function manageEmployees() {
                     break;
                 case "Update Employee Role":
                     updateRole();
+                    break;
+                case "Delete Role":
+                    deleteRole();
                     break;
             }
         })
@@ -237,6 +241,29 @@ function updateRole() {
     })
 }
 
+// Delete Role
+function deleteRole() {
+    connection.query("SELECT * FROM role", function (err, res) {
+        var delRole = [];
+        for (var i = 0; i < res.length; i++) {
+            delRole.push(res[i].title)
+        }
+        inquirer.prompt([{
+            name: "delete",
+            type: "list",
+            choices: delRole,
+            message: "Which role would you like to delete?"
+        }]).then(function (answer) {
+            connection.query("DELETE FROM role WHERE ?", {
+                title: answer.delete
+            })
+            roleTable()
+
+        })
+    })
+
+}
+
 // Start Over
 function restart() {
     inquirer.prompt([{
@@ -254,6 +281,7 @@ function restart() {
     });
 }
 
+// End Connection
 function exit() {
     console.log("Thank you for using employee tracker!")
     connection.end()
