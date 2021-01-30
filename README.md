@@ -16,6 +16,7 @@
 * [Acknowledgments](#acknowledgments)
 
 ## Demo
+* Click this link to see a demo of the application.
 [Demo](https://drive.google.com/file/d/1hWp9hMdw0AY_eXNW05clstLZgZBAgMry/view)
 
 ## Technologies Used
