@@ -2,19 +2,18 @@
 
 ![License](https://img.shields.io/badge/license-MIT-181717?style=for-the-badge) 
 
-
 ## Table of Contents
 * [Title](#title)
 * [Demo](#demo)
 * [Technologies Used](#technologies-used)
 * [Description](#description)
+* [Usage](#usage)
 * [Work Involved](#work-involved)
 * [Code Snippet](#code-snippet)
 * [License](#license)
 * [Authors](#authors)
 * [Questions](#questions)
 * [Acknowledgments](#acknowledgments)
-
 
 ## Demo
 [Demo](https://drive.google.com/file/d/1hWp9hMdw0AY_eXNW05clstLZgZBAgMry/view)
@@ -29,6 +28,13 @@
 
 ## Description
 The employer tracker application allows a user to manage a company's employees. It allows a user to add and vie departments, roles, employees, as well as update employee roles. 
+
+## Usage
+* To use this application first you would type in employee.js into your terminal.
+* Then a list of options will appear:
+![Application](./images/info.png)
+* You can use your cursor to select which option you would like to see.
+![Role-Table](./images/role.png)
 
 ## Work Involved
 In order to build this application, I utilized MySQL in order to create an employee database and connect it to my local host. I utilized InquirerJs to develop the user prompts, and console.table to print MySQL rows into the console.
@@ -54,7 +60,6 @@ function employeeTable() {
     });
 }
 ```
-
 
 ## License
 This project is covered under MIT.
