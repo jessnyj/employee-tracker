@@ -124,35 +124,17 @@ function departmentTable() {
     });
 }
 
-// function updateRating(list) {
+function managerAdd() {
+    connection.query("SELECT role.id, employee.manager_id, employee.first_name, employee.last_name FROM role INNER JOIN employee ON role.id = employee.manager_id", function (err, res) {
 
-//     inquirer.prompt([{
-//         name: "nominee",
-//         type: "list",
-//         message: "Which show do you want to change the rating for",
-//         choices: list
-//     }, {
-//         name: "rating",
-//         message: "Enter the new rating out of 10 (decimals up to two places are accepted)"
-//     }]).then(function (answers) {
-//         connection.query("UPDATE nominees SET ? WHERE?", [{
-//             rating: parseFloat(answers.rating)
-//         }, {
-//             show_name: answers.nominee
-//         }],
-//             function (err, res) {
-//                 console.log("Here is an updated list of the nominees:")
-//                 review()
-
-//             }
-//         )
-//     })
-
+    })
+}
 // SELECT nutrition.id, ingredients.foodname FROM ingredients INNER JOIN nutrition ON nutrition.foodname = ingredients.foodname
 
+// SELECT role.title, role.id, employee.role_id FROM role INNER JOIN employee ON role.id = employee.role_id
 // Add Employee
 function employeeAdd() {
-    connection.query("SELECT title, id FROM role", function (err, res) {
+    connection.query("SELECT role.title, role.id, employee.role_id FROM role INNER JOIN employee ON role.id = employee.role_id", function (err, res) {
         var titleRole = [];
         // var roleId = [];
         for (var i = 0; i < res.length; i++) {
@@ -180,7 +162,7 @@ function employeeAdd() {
             connection.query("INSERT INTO employee SET ?", {
                 first_name: answers.firstName,
                 last_name: answers.lastName,
-                role_id: answers.titleRole,
+                role_id: answers.role,
                 // manager_id: answers.manager
             })
             employeeTable();
@@ -206,4 +188,10 @@ function restart() {
 
     });
 }
+
+function exit() {
+    console.log("Thank you for using employee tracker!")
+    connection.end()
+}
+
 manageEmployees();
