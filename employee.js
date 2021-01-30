@@ -58,7 +58,7 @@ function manageEmployees() {
                     departmentAdd();
                     break;
                 case "Add Role":
-                    roleAdd;
+                    roleAdd();
                     break;
                 case "Update Employee Role":
                     updateRole();
@@ -124,23 +124,26 @@ function departmentTable() {
     });
 }
 
-function managerAdd() {
-    connection.query("SELECT role.id, employee.manager_id, employee.first_name, employee.last_name FROM role INNER JOIN employee ON role.id = employee.manager_id", function (err, res) {
+// function managerAdd() {
+//     connection.query("SELECT role.id, employee.manager_id, employee.first_name, employee.last_name FROM role INNER JOIN employee ON role.id = employee.manager_id", function (err, res) {
+//         var managerId = [];
+//         for (var i = 0; i < res.length; i++) {
+//             var data = {name: res[i].first_name, value: res[i].id}
+//             managerId.push(data);
 
-    })
-}
+//         }
+//     })
+// }
 // SELECT nutrition.id, ingredients.foodname FROM ingredients INNER JOIN nutrition ON nutrition.foodname = ingredients.foodname
 
 // SELECT role.title, role.id, employee.role_id FROM role INNER JOIN employee ON role.id = employee.role_id
 // Add Employee
 function employeeAdd() {
     connection.query("SELECT role.title, role.id, employee.role_id FROM role INNER JOIN employee ON role.id = employee.role_id", function (err, res) {
-        var titleRole = [];
-        // var roleId = [];
+        var roleId = [];
         for (var i = 0; i < res.length; i++) {
-            // var temp = {roleName: res[i].title, idNum: res[i].id}
-            titleRole.push(res[i].title);
-            // roleId.push(temp);
+            var temp = { name: res[i].title, value: res[i].id }
+            roleId.push(temp);
         }
         inquirer.prompt([{
             name: "firstName",
@@ -152,12 +155,14 @@ function employeeAdd() {
             type: 'list',
             name: "role",
             message: "What is the employee's role?\n",
-            choices: titleRole,
-        }, {
+            choices: roleId,
+        } 
+        // {
             // name: "manager",
             // message: "Who is the employee's manager?\n"
 
-        }]).then(function (answers) {
+        // }
+    ]).then(function (answers) {
             console.log(answers.role);
             connection.query("INSERT INTO employee SET ?", {
                 first_name: answers.firstName,
@@ -167,10 +172,7 @@ function employeeAdd() {
             })
             employeeTable();
         })
-
-    }
-
-    )
+    })
 }
 // Start Over
 function restart() {
