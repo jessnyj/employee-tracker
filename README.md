@@ -3,31 +3,24 @@
 ![License](https://img.shields.io/badge/license-MIT-181717?style=for-the-badge) 
 
 ## Table of Contents
-* [Title](#title)
-* [Demo](#demo)
-* [Technologies Used](#technologies-used)
-* [Description](#description)
-* [Usage](#usage)
-* [Work Involved](#work-involved)
-* [Code Snippet](#code-snippet)
-* [License](#license)
-* [Authors](#authors)
-* [Questions](#questions)
-* [Acknowledgments](#acknowledgments)
+||||
+|:-:|:-:|:-:|
+|[Table Contents](#table-of-contents)|[Demo](#demo)|[Technologies Used](#technologies-used)
+|[Description](#description)|[Work Involved](#work-involved)|[Code Snippet](#code-snippet)
+|[Usage](#usage)|[Authors](#authors)|[Acknowledgments](#acknowledgments)
 
 ## Demo
 * Click this link to see a demo of the application.
 [Demo](https://drive.google.com/file/d/1hWp9hMdw0AY_eXNW05clstLZgZBAgMry/view)
 
 ## Technologies Used
-* javascript
-* MySQL
-* NodeJS
-* InquirerJs
-* Github
+||||
+|:-:|:-:|:-:|
+|Express	|NodeJS |Javascript |	
+|InquirerJS	|MySQL |console.table
 
 ## Description
-The employer tracker application allows a user to manage a company's employees. It allows a user to add and vie departments, roles, employees, as well as update employee roles. 
+The employer tracker application allows a user to manage a company's employees. It allows a user to add and view departments, roles, employees, as well as update employee roles. 
 
 ## Usage
 * To use this application first you would type in employee.js into your terminal.
@@ -69,9 +62,7 @@ This project is covered under MIT.
 
 **Jessny Joseph** 
 
-## Questions 
-* [Github](https://github.com/jessnyj)
-* [LinkedIn](https://www.linkedin.com/in/jessny-joseph-361515201)
+[Github](https://github.com/jessnyj) | [LinkedIn](https://www.linkedin.com/in/jessny-joseph-361515201)
 
 ## Acknowledgments
-Trilogy Education Services
+I would like to thank the mentors and colleagues who helped inspire and improve upon this project.
